@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Predecessor Menu Base v1.0.0",
+    "desc": "Initial stable release with HUD FX and loader integration.",
+    "file": "#",
+    "updated": "2025-09-15"
+  },
+  {
+    "name": "Developer Kit v1.1.0",
+    "desc": "New queue system and decoder-style text animation improvements.",
+    "file": "#",
+    "updated": "2025-10-12"
+  }
+]

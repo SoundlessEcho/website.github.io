@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Predecessor</title>
+<link rel="icon" href="assets/img/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css"/>
+<script defer src="assets/js/nav.js"></script>
+<script defer src="assets/js/matrix.js"></script>
+<script defer src="assets/js/badges.js"></script></head>
+  <body>
+    <header class="site-header">
+  <div class="brand">
+    <img class="logo" src="assets/img/logo.svg" alt="Predecessor logo" />
+    <span class="brand-name">Predecessor</span>
+  </div>
+  <button class="nav-toggle" aria-label="Open Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" data-collapsible>
+    <a href="index.html">Home</a>
+    <a href="showcase.html">Showcase</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="store.html">Store</a>
+    <a href="about.html">About Me</a>
+  </nav>
+</header>
+<canvas id="matrix-bg" aria-hidden="true"></canvas>
+    <main class="container">
+      <h1>Downloads</h1>
+      <p class="muted">Add releases in <span class="kbd">/data/downloads.json</span>. Items updated in the last 14 days are auto-tagged.</p>
+      <div id="files" class="list"></div>
+    </main>
+    <footer class="site-footer">
+  <p>© <span id="year"></span> Predecessor • Crafted with <span class="accent">code</span></p>
+</footer>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+    <script>
+      fetch('data/downloads.json').then(r=>r.json()).then(items => {
+        const list = document.getElementById('files');
+        items.forEach(f => {
+          const row = document.createElement('div');
+          row.className = 'list-item';
+          row.setAttribute('data-updated', f.updated || '');
+          row.innerHTML = `
+            <div class="meta">
+              <h4 class="title">${f.name}</h4>
+              <div class="muted">Updated: ${f.updated || '—'}</div>
+              <p class="muted">${f.desc}</p>
+              <div class="actions">
+                <a class="btn" href="${f.file}" target="_blank" rel="noopener">Download</a>
+              </div>
+            </div>`;
+          list.appendChild(row);
+        });
+        window.PredecessorBadges.addBadges(list);
+      }).catch(()=>{});
+    </script>
+  </body>
+</html>

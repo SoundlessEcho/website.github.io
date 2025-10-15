@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Predecessor</title>
+<link rel="icon" href="assets/img/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css"/>
+<script defer src="assets/js/nav.js"></script>
+<script defer src="assets/js/matrix.js"></script>
+<script defer src="assets/js/badges.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+  <div class="brand">
+    <img class="logo" src="assets/img/logo.svg" alt="Predecessor logo" />
+    <span class="brand-name">Predecessor</span>
+  </div>
+  <button class="nav-toggle" aria-label="Open Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" data-collapsible>
+    <a href="index.html">Home</a>
+    <a href="showcase.html">Showcase</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="store.html">Store</a>
+    <a href="about.html">About Me</a>
+  </nav>
+</header>
+<canvas id="matrix-bg" aria-hidden="true"></canvas>
+    <main>
+      <section class="container hero">
+        <div>
+          <h1>Build faster with <span class="accent">Predecessor</span></h1>
+          <p>The coding‑themed base for professional, future‑ready modding sites. Dark green / black styling, responsive nav, video showcases, auto badges, and more.</p>
+          <div class="cta">
+            <a class="btn" href="downloads.html">Downloads</a>
+            <a class="btn secondary" href="showcase.html">Showcase</a>
+          </div>
+          <p class="muted" style="margin-top:8px">Tip: Items updated in the last <span class="kbd">14 days</span> are automatically tagged <span class="badge new">NEW</span> and <span class="badge latest">Latest</span>.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Latest Updates</h3>
+          <div id="home-latest" class="list"></div>
+        </div>
+      </section>
+
+      <section class="container">
+        <h2>Highlights</h2>
+        <div class="grid" id="home-highlights"></div>
+      </section>
+    </main>
+    <footer class="site-footer">
+  <p>© <span id="year"></span> Predecessor • Crafted with <span class="accent">code</span></p>
+</footer>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+    <script>
+      // Load data from JSON and render home sections
+      Promise.all([
+        fetch('data/showcase.json').then(r=>r.json()).catch(()=>[]),
+        fetch('data/downloads.json').then(r=>r.json()).catch(()=>[])
+      ]).then(([videos, files]) => {
+        const latest = (videos||[]).concat(files||[])
+          .sort((a,b)=> new Date(b.updated||0)-new Date(a.updated||0))
+          .slice(0,4);
+        const list = document.getElementById('home-latest');
+        latest.forEach(item => {
+          const el = document.createElement('div');
+          el.className = 'list-item';
+          el.setAttribute('data-updated', item.updated || '');
+          el.innerHTML = `
+            <div class="meta">
+              <h4 class="title">{}</h4>
+              <div class="muted">Updated: ${item.updated || '—'}</div>
+              <p class="muted">${item.description || item.desc || ''}</p>
+            </div>`;
+          el.querySelector('.title').textContent = item.title || item.name;
+          list.appendChild(el);
+        });
+        window.PredecessorBadges.addBadges(list);
+
+        // Highlights from showcase videos
+        const grid = document.getElementById('home-highlights');
+        (videos||[]).slice(0,3).forEach(v => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.setAttribute('data-updated', v.updated||'');
+          card.innerHTML = `
+            <div class="video">
+              <iframe src="https://www.youtube.com/embed/${v.youtubeId}" title="${v.title}" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <h3 class="title">${v.title}</h3>
+            <p class="muted">${v.description}</p>`;
+          grid.appendChild(card);
+        });
+        window.PredecessorBadges.addBadges(grid);
+      });
+    </script>
+  </body>
+</html>

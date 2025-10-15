@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Predecessor</title>
+<link rel="icon" href="assets/img/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css"/>
+<script defer src="assets/js/nav.js"></script>
+<script defer src="assets/js/matrix.js"></script>
+<script defer src="assets/js/badges.js"></script></head>
+  <body>
+    <header class="site-header">
+  <div class="brand">
+    <img class="logo" src="assets/img/logo.svg" alt="Predecessor logo" />
+    <span class="brand-name">Predecessor</span>
+  </div>
+  <button class="nav-toggle" aria-label="Open Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" data-collapsible>
+    <a href="index.html">Home</a>
+    <a href="showcase.html">Showcase</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="store.html">Store</a>
+    <a href="about.html">About Me</a>
+  </nav>
+</header>
+<canvas id="matrix-bg" aria-hidden="true"></canvas>
+    <main class="container">
+      <h1>About Me</h1>
+      <div class="card">
+        <p>Welcome to <strong>Predecessor</strong> — a professional, coding‑themed site for showcasing and shipping my modding work.</p>
+        <ul>
+          <li>Dark green / black aesthetic with Matrix‑style background.</li>
+          <li>Responsive, collapsible navigation (desktop & mobile).</li>
+          <li>Auto <span class="badge new">NEW</span> / <span class="badge latest">Latest</span> badges for updates in 14 days.</li>
+          <li>Showcase embeds YouTube videos with titles & descriptions.</li>
+          <li>Downloads lists releases with one‑click access.</li>
+          <li>Store routes buys directly to my Discord.</li>
+        </ul>
+        <p class="muted">Edit any content in the <span class="kbd">/data</span> JSON files.</p>
+      </div>
+    </main>
+    <footer class="site-footer">
+  <p>© <span id="year"></span> Predecessor • Crafted with <span class="accent">code</span></p>
+</footer>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Developer Kit",
+    "price": 25,
+    "desc": "Full toolkit for rapid GSC dev with HUD animation pack.",
+    "link": "https://discord.gg/yourinvite"
+  },
+  {
+    "name": "Predecessor",
+    "price": 10,
+    "desc": "Lightweight base with essentials and quick-start templates.",
+    "link": "https://discord.gg/yourinvite"
+  }
+]

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Predecessor</title>
+<link rel="icon" href="assets/img/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css"/>
+<script defer src="assets/js/nav.js"></script>
+<script defer src="assets/js/matrix.js"></script>
+<script defer src="assets/js/badges.js"></script></head>
+  <body>
+    <header class="site-header">
+  <div class="brand">
+    <img class="logo" src="assets/img/logo.svg" alt="Predecessor logo" />
+    <span class="brand-name">Predecessor</span>
+  </div>
+  <button class="nav-toggle" aria-label="Open Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-links" data-collapsible>
+    <a href="index.html">Home</a>
+    <a href="showcase.html">Showcase</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="store.html">Store</a>
+    <a href="about.html">About Me</a>
+  </nav>
+</header>
+<canvas id="matrix-bg" aria-hidden="true"></canvas>
+    <main class="container">
+      <h1>Showcase</h1>
+      <p class="muted">Embedded YouTube demos with titles and descriptions. Add more in <span class="kbd">/data/showcase.json</span>.</p>
+      <div id="videos" class="grid"></div>
+    </main>
+    <footer class="site-footer">
+  <p>© <span id="year"></span> Predecessor • Crafted with <span class="accent">code</span></p>
+</footer>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+    <script>
+      fetch('data/showcase.json').then(r=>r.json()).then(items => {
+        const grid = document.getElementById('videos');
+        items.forEach(v => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.setAttribute('data-updated', v.updated || '');
+          card.innerHTML = `
+            <div class="video">
+              <iframe src="https://www.youtube.com/embed/${v.youtubeId}" title="${v.title}" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <h3 class="title">${v.title}</h3>
+            <p class="muted">${v.description}</p>
+            <div class="muted">Updated: ${v.updated || '—'}</div>`;
+          grid.appendChild(card);
+        });
+        window.PredecessorBadges.addBadges(grid);
+      }).catch(()=>{});
+    </script>
+  </body>
+</html>
