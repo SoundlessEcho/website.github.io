@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#03110b">
+  <title>Predecessor — Developer Hub — Store</title>
+  <meta name="description" content="Predecessor Developer Hub — professional modding base, downloads, showcase, and store.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preload" href="assets/img/logo.svg" as="image">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <canvas id="matrix-canvas"></canvas>
+  <div class="grid-overlay"></div>
+
+  <header class="header">
+    <nav class="nav">
+      <div class="brand">
+        <img src="assets/img/logo.svg" alt="Predecessor logo" height="36" width="180" />
+        <span class="brand-name">PREDECESSOR</span>
+      </div>
+      <div class="menu" role="menu" aria-label="Primary">
+        <a data-nav href="index.html">Home</a>
+        <a data-nav href="showcase.html">Showcase</a>
+        <a data-nav href="download.html">Download</a>
+        <a data-nav href="store.html">Store</a>
+        <a data-nav href="about.html">About Me</a>
+      </div>
+      <button class="hamburger" aria-label="Menu"><span></span></button>
+    </nav>
+  </header>
+
+  <main class="container">
+    
+<section class="card">
+  <h2>Store</h2>
+  <p class="small">List your products, tiers, or licenses. Update prices and descriptions as you like.</p>
+  <table class="table">
+    <thead>
+      <tr><th>Item</th><th>Description</th><th>Price</th><th></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Developer Kit — Base</td>
+        <td>Core menu base with HUD system and docs.</td>
+        <td class="price">$25</td>
+        <td><a class="btn" href="#">Buy</a></td>
+      </tr>
+      <tr>
+        <td>Developer Kit — Pro</td>
+        <td>Base + live support + early betas.</td>
+        <td class="price">$45</td>
+        <td><a class="btn" href="#">Buy</a></td>
+      </tr>
+      <tr>
+        <td>Custom Feature</td>
+        <td>Commission a custom module or integration.</td>
+        <td class="price">$??</td>
+        <td><a class="btn" href="#contact">Request</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+  </main>
+
+  <footer>
+    <div class="row small">
+      <div>© 2025 Predecessor. All rights reserved.</div>
+      <div>Press <kbd>M</kbd> to toggle the Matrix background.</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/matrix.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

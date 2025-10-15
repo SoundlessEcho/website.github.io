@@ -1,0 +1,128 @@
+
+:root{
+  --bg: #03110b;
+  --bg-soft: #051c12;
+  --fg: #e6fff2;
+  --muted: #9debc7;
+  --primary: #00ff7f;
+  --primary-2: #00e676;
+  --card: rgba(0,0,0,.35);
+  --br: 12px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; padding:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+a{ color: var(--primary); text-decoration: none }
+a:hover{ text-decoration: underline }
+
+/* Matrix canvas is fixed and behind everything */
+#matrix-canvas{
+  position: fixed; inset: 0; z-index: -2;
+  background: radial-gradient(1200px 800px at 20% -10%, #062318 0%, #03110b 35%, #000 100%);
+}
+
+/* A subtle grid overlay */
+.grid-overlay{
+  pointer-events:none; position:fixed; inset:0; z-index:-1;
+  background-image:
+    linear-gradient(rgba(0,255,127,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,127,.05) 1px, transparent 1px);
+  background-size: 40px 40px, 40px 40px;
+}
+
+/* Header / Nav */
+.header{
+  position: sticky; top:0; z-index: 50;
+  background: rgba(0,0,0,.55); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0,255,127,.15);
+}
+.nav{ display:flex; align-items:center; justify-content:space-between; max-width:1100px; margin:0 auto; padding:12px 20px; }
+.brand{ display:flex; align-items:center; gap:10px; }
+.brand img{ height:36px; width:auto }
+.brand-name{ font-weight:900; letter-spacing:2px; color:var(--primary) }
+
+.menu{ display:flex; gap:14px; align-items:center }
+.menu a{
+  padding:8px 12px; border-radius:8px;
+  font-weight:600; letter-spacing:.3px;
+  color:var(--fg);
+  border:1px solid transparent;
+}
+.menu a.active, .menu a:focus-visible{
+  border-color: rgba(0,255,127,.4);
+  background: rgba(0,255,127,.1);
+  outline: none;
+}
+.hamburger{
+  display:none; width:38px; height:38px;
+  align-items:center; justify-content:center; border-radius:10px;
+  border:1px solid rgba(0,255,127,.25); background: rgba(0,0,0,.35);
+  cursor:pointer;
+}
+.hamburger span{ width:20px; height:2px; background:var(--primary); display:block; box-shadow:0 6px 0 var(--primary), 0 -6px 0 var(--primary); }
+
+@media (max-width: 860px){
+  .menu{ display:none; position: absolute; top:64px; left:12px; right:12px; flex-direction:column; background:rgba(0,0,0,.85); border:1px solid rgba(0,255,127,.25); border-radius:12px; padding:8px }
+  .menu.open{ display:flex }
+  .hamburger{ display:flex }
+}
+
+/* Main layout */
+.container{ max-width:1100px; margin: 24px auto 60px; padding: 0 20px; }
+.hero{
+  display:grid; grid-template-columns: 1.3fr 1fr; gap:24px; align-items:center;
+  margin-top: 28px;
+}
+.hero-card, .card{
+  background: var(--card);
+  border: 1px solid rgba(0,255,127,.15);
+  border-radius: var(--br);
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+.hero h1{ font-size: clamp(28px, 4vw, 44px); margin: 0 0 6px; color: var(--primary); letter-spacing: 1px }
+.hero p{ color: var(--muted); margin: 8px 0 0 }
+
+.btn{
+  display:inline-flex; gap:10px; align-items:center; justify-content:center;
+  padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(0,255,127,.35);
+  background: linear-gradient(180deg, rgba(0,255,127,.15), rgba(0,255,127,.05));
+  color: var(--fg); font-weight: 700; letter-spacing:.3px;
+}
+.btn:hover{ transform: translateY(-1px); }
+.btn.primary{ background: linear-gradient(180deg, #00ff7f22, #00e67622); border-color: #00ff7f66 }
+.badge{ display:inline-flex; align-items:center; gap:6px; font-size: 12px; padding:4px 8px; border-radius:999px; background: rgba(0,255,127,.12); border:1px solid rgba(0,255,127,.35); color: var(--muted); }
+
+.grid{ display:grid; gap:14px }
+.grid.cols-3{ grid-template-columns: repeat(3, minmax(0, 1fr)) }
+.grid.cols-2{ grid-template-columns: repeat(2, minmax(0, 1fr)) }
+@media (max-width: 860px){ .hero{ grid-template-columns: 1fr } .grid.cols-3{ grid-template-columns: 1fr } .grid.cols-2{ grid-template-columns: 1fr } }
+
+footer{ margin: 40px auto; max-width:1100px; padding: 0 20px; color: var(--muted); opacity:.9 }
+footer .row{ display:flex; align-items:center; justify-content:space-between; gap:16px; border-top:1px solid rgba(0,255,127,.15); padding-top:16px }
+
+kbd{ background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-bottom-width:2px; padding:2px 6px; border-radius:6px }
+.small{ font-size: 13px; color: var(--muted) }
+
+/* Showcase */
+.card img{ width:100%; height: auto; border-radius:10px; border:1px solid rgba(255,255,255,.08) }
+
+/* Download Badges */
+.badges{ display:flex; flex-wrap:wrap; gap:8px }
+.badge .dot{ width:8px; height:8px; border-radius:999px; background: var(--primary) }
+
+/* Store table */
+.table{ width:100%; border-collapse: collapse; }
+.table th,.table td{ border-bottom:1px solid rgba(0,255,127,.15); padding:10px 8px; text-align:left }
+.table th{ color:var(--muted); font-weight:700; }
+.price{ font-weight:800 }
+code{ font-family: Consolas, 'Fira Code', Menlo, monospace; background: rgba(0,255,127,.08); padding: 2px 6px; border-radius:6px; border:1px solid rgba(0,255,127,.2) }
